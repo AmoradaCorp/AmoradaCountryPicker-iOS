@@ -10,18 +10,23 @@ Compatible con multilenguaje, Clean Architecture, SOLID y las mejores prácticas
 - ✅ Selector de país, moneda o código telefónico.
 - ✅ Basado 100% en SwiftUI.
 - ✅ Compatibilidad con `@Binding` y estados reactivos.
-- ✅ Soporte para múltiples idiomas (es, en, pt, fr, de, ru, zh, hi, ar, jp).
+- ✅ Soporte para múltiples idiomas (`es`, `en`, `pt`, `fr`, `de`, `ru`, `zh`, `hi`, `ar`, `jp`).
 - ✅ Implementación de `CountryProvider` desacoplada para mayor flexibilidad.
 - ✅ Arquitectura limpia y lista para usar en cualquier proyecto iOS moderno.
 
 ---
 
-## 🚀 Instalación
+## 🚀 Instalación vía Swift Package Manager
 
-Clona o añade el repositorio como submódulo o vía `Swift Package Manager` (SPM):
-
+1. En Xcode: `File > Add Packages`
+2. Pega la URL:
 ```
 https://github.com/AmoradaCorp/AmoradaCountryPicker-iOS.git
+```
+3. Selecciona la versión: `From 1.0.0`
+4. Importa el módulo en tus archivos:
+```swift
+import AmoradaCountryPicker
 ```
 
 ---
@@ -63,11 +68,12 @@ struct ContentView: View {
             CountryPickerView(
                 selectedCountry: $selectedCountry,
                 countries: provider.getCountries(),
-                label: "Selecciona un país",
-                placeholder: "Buscar país...",
+                labelText: "País de residencia",
+                placeholderText: "Buscar país...",
+                searchPlaceholderText: "Buscar...",
                 noResultsText: "Sin resultados",
-                labelFont: .caption,
-                textFont: .body
+                textStyle: .body,
+                labelStyle: .caption
             )
         }
         .padding()
@@ -81,11 +87,22 @@ struct ContentView: View {
 
 Puedes pasar estos parámetros opcionales:
 
-- `label`: Texto para la etiqueta.
-- `placeholder`: Texto dentro del campo de búsqueda.
-- `noResultsText`: Texto a mostrar si no hay resultados.
-- `labelFont` y `textFont`: Tipografía de los textos.
-- `singleLine`: Verdadero si quieres truncar el texto.
+- `labelText`: Texto sobre el campo.
+- `placeholderText`: Texto cuando no hay selección.
+- `searchPlaceholderText`: Texto en la barra de búsqueda.
+- `noResultsText`: Texto cuando no hay coincidencias.
+- `textStyle`: Fuente del contenido principal.
+- `labelStyle`: Fuente del label.
+
+---
+
+## 🌍 Soporte multilenguaje
+
+El proveedor `AssetCountryProvider` detecta automáticamente el idioma del dispositivo y carga el archivo `countries_xx.json` correspondiente. También puedes forzarlo con:
+
+```swift
+AssetCountryProvider(languageCode: "ja")
+```
 
 ---
 
